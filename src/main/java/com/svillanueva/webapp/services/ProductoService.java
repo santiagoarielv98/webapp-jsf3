@@ -6,7 +6,6 @@ import jakarta.ejb.Local;
 import java.util.List;
 import java.util.Optional;
 
-
 @Local
 public interface ProductoService {
     List<Producto> listar();

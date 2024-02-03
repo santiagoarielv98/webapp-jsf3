@@ -19,7 +19,7 @@ public class ProductoController {
     @Produces
     @Model
     public String titulo() {
-        return "Facelet Title desde Controller!";
+        return "Facelet Title desde Controller!" + System.currentTimeMillis();
     }
 
     @Produces

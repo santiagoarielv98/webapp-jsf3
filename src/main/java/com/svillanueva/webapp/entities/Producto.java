@@ -18,6 +18,7 @@ public class Producto {
     private String sku;
 
     @Column(name = "fecha_registro")
+    //    @CreationTimestamp
     private LocalDate fechaRegistro;
 
     public Producto() {
@@ -61,5 +62,20 @@ public class Producto {
 
     public void setFechaRegistro(LocalDate fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
+    }
+
+    @PrePersist
+    public void prePersist() {
+        fechaRegistro = LocalDate.now();
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", precio=" + precio +
+                ", sku='" + sku + '\'' +
+                '}';
     }
 }

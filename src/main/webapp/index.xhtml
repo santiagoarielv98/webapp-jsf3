@@ -6,76 +6,42 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
 >
 <h:head>
-    <title><h:outputText value="#{titulo}"/></title>
+    <title>Listado de productos</title>
 </h:head>
 <h:body>
-    <h:panelGrid border="1">
-        <f:facet name="header">
-            <h:outputText value="#{titulo}"/>
-        </f:facet>
-        <h:form id="crearForm">
-            <!--        <h:commandLink value="Crear Producto" action="/form"/>-->
-            <h:commandButton value="Crear Producto" action="/form"/>
-        </h:form>
-        <h:outputLabel value="No existe producto en la base de datos!" rendered="#{empty listadoProducto}"/>
-        <h:dataTable value="#{listadoProducto}" var="producto" rendered="#{not empty listadoProducto}">
+    <h2>Listado de Productos</h2>
+
+    <h:form>
+        <h:commandButton value="Crear Nuevo Producto" action="form?faces-redirect=true"/>
+    </h:form>
+
+    <h:form>
+        <h:dataTable value="#{productoController.productos}" var="producto" styleClass="productos-table">
             <h:column>
-                <f:facet name="header">
-                    <h:outputText value="ID"/>
-                </f:facet>
+                <f:facet name="header">ID</f:facet>
                 <h:outputText value="#{producto.id}"/>
             </h:column>
             <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Nombre"/>
-                </f:facet>
+                <f:facet name="header">Nombre</f:facet>
                 <h:outputText value="#{producto.nombre}"/>
             </h:column>
             <h:column>
-                <f:facet name="header">
-                    <h:outputText value="SKU"/>
-                </f:facet>
+                <f:facet name="header">Sku</f:facet>
                 <h:outputText value="#{producto.sku}"/>
             </h:column>
             <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Precio"/>
-                </f:facet>
+                <f:facet name="header">Precio</f:facet>
                 <h:outputText value="#{producto.precio}"/>
             </h:column>
             <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Fecha"/>
-                </f:facet>
-                <h:outputText value="#{producto.fechaRegistro}"/>
+                <h:commandButton value="Editar" action="#{productoController.editar(producto.id)}"/>
             </h:column>
             <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Editar"/>
-                </f:facet>
-                <h:form id="editarForm">
-                    <h:commandLink value="editar" action="#{productoController.editar(producto.id)}"/>
-                </h:form>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Editar por get"/>
-                </f:facet>
-                <h:link value="editar por get" outcome="form">
-                    <f:param name="id" value="#{producto.id}"/>
-                </h:link>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Eliminar"/>
-                </f:facet>
-                <h:form id="eliminarForm">
-                    <h:commandLink value="eliminar" action="#{productoController.eliminar(producto.id)}"
-                                   onclick="return confirm('Esta seguro que quieres eliminar?')"
-                    />
-                </h:form>
+                <h:commandButton value="Eliminar" action="#{productoController.eliminar(producto.id)}"
+                                 onclick="return confirm('¿Está seguro que desea eliminar este producto?');"/>
             </h:column>
         </h:dataTable>
-    </h:panelGrid>
+    </h:form>
 </h:body>
+
 </html>

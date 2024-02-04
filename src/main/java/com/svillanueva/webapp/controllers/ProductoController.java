@@ -2,69 +2,59 @@ package com.svillanueva.webapp.controllers;
 
 import com.svillanueva.webapp.entities.Producto;
 import com.svillanueva.webapp.services.ProductoService;
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.enterprise.inject.Model;
-import jakarta.enterprise.inject.Produces;
+import jakarta.annotation.PostConstruct;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
+import java.io.Serializable;
 import java.util.List;
 
-@Model
-public class ProductoController {
-
-    private Long id;
-
-
-    private Producto producto;
-
+@Named
+@ViewScoped
+public class ProductoController implements Serializable {
     @Inject
     private ProductoService productoService;
 
-    @Produces
-    @Model
-    public String titulo() {
-        return "Facelet Title desde Controller!" + System.currentTimeMillis();
-    }
+    private Producto producto;
+    private List<Producto> productos;
 
-    @Produces
-    @RequestScoped
-    @Named("listadoProducto")
-    public List<Producto> findAll() {
-        return productoService.listar();
-    }
-
-    @Produces
-    @Model
-    public Producto nuevoProducto() {
+    @PostConstruct
+    public void init() {
+        productos = productoService.listar();
         producto = new Producto();
-        if (id != null && id > 0) {
-            productoService.porId(id)
-                    .ifPresent(p -> this.producto = p);
-        }
+    }
+
+    public void guardar() {
+        productoService.guardar(producto);
+        producto = new Producto(); // Reiniciar el producto después de guardar
+        productos = productoService.listar(); // Actualizar la lista después de guardar
+    }
+
+    public void editar(Long id) {
+        producto = productoService.porId(id)
+                .orElse(new Producto());
+    }
+
+    public void eliminar(Long id) {
+        productoService.eliminar(id);
+        productos = productoService.listar(); // Actualizar la lista después de eliminar
+    }
+
+    // Getters y Setters
+    public Producto getProducto() {
         return producto;
     }
 
-    public String guardar() {
-        productoService.guardar(producto);
-        return "index?faces-redirect=true";
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
-    public String editar(Long id) {
-        this.id = id;
-        return "form.xhtml";
+    public List<Producto> getProductos() {
+        return productos;
     }
 
-    public String eliminar(Long id) {
-        productoService.eliminar(id);
-        return "index.xhtml?faces-redirect=true";
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
     }
 }

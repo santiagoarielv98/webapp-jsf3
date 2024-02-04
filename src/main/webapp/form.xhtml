@@ -33,9 +33,7 @@
 
             <h:outputLabel for="precio" value="Precio:"/>
             <h:inputText id="precio" value="#{productoController.producto.precio}" required="true"
-                         requiredMessage="El precio es obligatorio.">
-                <f:convertNumber type="currency"/>
-            </h:inputText>
+                         requiredMessage="El precio es obligatorio."/>
 
             <!-- Muestra la fecha de registro solo si se está editando un producto existente -->
             <h:outputLabel for="fechaRegistro" value="Fecha de Registro:"

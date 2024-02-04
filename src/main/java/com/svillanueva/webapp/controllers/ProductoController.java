@@ -25,15 +25,19 @@ public class ProductoController implements Serializable {
         producto = new Producto();
     }
 
-    public void guardar() {
+    public String guardar() {
+        System.out.println("Guardando producto: " + producto);
         productoService.guardar(producto);
-        producto = new Producto(); // Reiniciar el producto después de guardar
+        producto = new Producto(); // Limpiar el formulario
         productos = productoService.listar(); // Actualizar la lista después de guardar
+        System.out.println("Productos: " + productos);
+        return "index?faces-redirect=true";
     }
 
-    public void editar(Long id) {
+    public String editar(Long id) {
         producto = productoService.porId(id)
                 .orElse(new Producto());
+        return "form?faces-redirect=true";
     }
 
     public void eliminar(Long id) {

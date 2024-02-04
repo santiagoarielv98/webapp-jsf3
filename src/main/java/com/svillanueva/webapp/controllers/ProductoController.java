@@ -20,19 +20,19 @@ public class ProductoController implements Serializable {
 
     public String guardar() {
         productoService.guardar(producto);
-        producto = new Producto(); // Limpiar el formulario
-        productos = productoService.listar(); // Actualizar la lista después de guardar
-        return "index";
+        producto = new Producto();
+        return "index?faces-redirect=true";
     }
 
-    public String editar(/*Long id*/ Producto producto) {
-        this.producto = producto;
-        return "form";
+    public String editar(Long id) {
+        producto = productoService.porId(id)
+                .orElse(new Producto());
+        return "form?faces-redirect=true";
     }
 
     public void eliminar(Long id) {
         productoService.eliminar(id);
-        productos = productoService.listar(); // Actualizar la lista después de eliminar
+        productos = null;
     }
 
     // Getters y Setters

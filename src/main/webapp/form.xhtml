@@ -44,7 +44,10 @@
             </h:inputText>
         </h:panelGrid>
 
-        <h:commandButton value="Guardar" action="#{productoController.guardar}"/>
+        <h:inputHidden value="#{productoController.producto.id}"/>
+
+        <h:commandButton value="#{productoController.producto.id != null ? 'Editar' : 'Crear'}"
+                         action="#{productoController.guardar}"/>
         <h:commandButton value="Cancelar" action="index?faces-redirect=true" immediate="true"/>
     </h:form>
 </h:body>

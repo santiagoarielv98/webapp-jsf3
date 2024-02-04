@@ -34,11 +34,11 @@
                 <h:outputText value="#{producto.precio}"/>
             </h:column>
             <h:column>
-                <h:commandButton value="Editar" action="${productoController.editar(producto)}"/>
+                <h:commandButton value="Editar" action="${productoController.editar(producto.id)}"/>
             </h:column>
             <h:column>
                 <h:commandButton value="Eliminar" action="#{productoController.eliminar(producto.id)}"
-                                 onclick="return confirm('¿Está seguro que desea eliminar este producto?');"/>
+                                 onclick="return confirm(`¿Está seguro que desea eliminar '#{producto.nombre}'?`)"/>
             </h:column>
         </h:dataTable>
     </h:form>

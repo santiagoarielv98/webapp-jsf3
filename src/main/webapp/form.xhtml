@@ -11,7 +11,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
 >
 
 <h:head>
@@ -19,6 +19,7 @@
 </h:head>
 
 <h:body>
+
     <h:panelGrid border="1">
         <f:facet name="header">
             <h:outputText value="Formulario Producto"/>
@@ -39,11 +40,13 @@
 
                 <h:commandButton value="Crear" action="#{productoController.guardar}"/>
                 <h:inputHidden value="#{nuevoProducto.id}"/>
-                <h:inputHidden value="#{nuevoProducto.fechaRegistro}"/>
+                <!--                <h:inputHidden value="#{nuevoProducto.fechaRegistro}"/>-->
             </h:panelGrid>
         </h:form>
     </h:panelGrid>
-
+    <f:metadata>
+        <f:viewParam name="id" value="#{productoController.id}"/>
+    </f:metadata>
 </h:body>
 
 </html>

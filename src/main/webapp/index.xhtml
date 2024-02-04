@@ -57,6 +57,24 @@
                     <h:commandLink value="editar" action="#{productoController.editar(producto.id)}"/>
                 </h:form>
             </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Editar por get"/>
+                </f:facet>
+                <h:link value="editar por get" outcome="form">
+                    <f:param name="id" value="#{producto.id}"/>
+                </h:link>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Eliminar"/>
+                </f:facet>
+                <h:form id="eliminarForm">
+                    <h:commandLink value="eliminar" action="#{productoController.eliminar(producto.id)}"
+                                   onclick="return confirm('Esta seguro que quieres eliminar?')"
+                    />
+                </h:form>
+            </h:column>
         </h:dataTable>
     </h:panelGrid>
 </h:body>

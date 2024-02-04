@@ -34,7 +34,7 @@
                 <h:outputText value="#{producto.precio}"/>
             </h:column>
             <h:column>
-                <h:commandButton value="Editar" action="${productoController.editar(producto.id)}"/>
+                <h:commandButton value="Editar" action="${productoController.editar(producto)}"/>
             </h:column>
             <h:column>
                 <h:commandButton value="Eliminar" action="#{productoController.eliminar(producto.id)}"

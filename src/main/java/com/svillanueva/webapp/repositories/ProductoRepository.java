@@ -1,13 +1,13 @@
 package com.svillanueva.webapp.repositories;
 
 import com.svillanueva.webapp.entities.Producto;
-import jakarta.ejb.Stateless;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 
 import java.util.List;
 
-@Stateless
+@RequestScoped
 public class ProductoRepository implements CrudRepository<Producto> {
 
     @Inject

@@ -35,13 +35,13 @@
             <h:inputText id="precio" value="#{productoController.producto.precio}" required="true"
                          requiredMessage="El precio es obligatorio."/>
 
-            <!-- Muestra la fecha de registro solo si se está editando un producto existente -->
             <h:outputLabel for="fechaRegistro" value="Fecha de Registro:"
                            rendered="#{productoController.producto.id != null}"/>
-            <h:outputText id="fechaRegistro" value="#{productoController.producto.fechaRegistro}"
-                          rendered="#{productoController.producto.id != null}">
-                <f:convertDateTime pattern="dd/MM/yyyy"/>
-            </h:outputText>
+            <h:inputText id="fechaRegistro" value="#{productoController.producto.fechaRegistro}"
+                         rendered="#{productoController.producto.id != null}">
+                <f:passThroughAttribute name="readonly" value="true"/>
+                <f:passThroughAttribute name="type" value="date"/>
+            </h:inputText>
         </h:panelGrid>
 
         <h:commandButton value="Guardar" action="#{productoController.guardar}"/>

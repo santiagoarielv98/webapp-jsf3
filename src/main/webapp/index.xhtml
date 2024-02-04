@@ -49,6 +49,14 @@
                 </f:facet>
                 <h:outputText value="#{producto.fechaRegistro}"/>
             </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Editar"/>
+                </f:facet>
+                <h:form id="editarForm">
+                    <h:commandLink value="editar" action="#{productoController.editar(producto.id)}"/>
+                </h:form>
+            </h:column>
         </h:dataTable>
     </h:panelGrid>
 </h:body>

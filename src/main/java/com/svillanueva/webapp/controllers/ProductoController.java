@@ -13,6 +13,9 @@ import java.util.List;
 @Model
 public class ProductoController {
 
+    private Long id;
+
+
     private Producto producto;
 
     @Inject
@@ -35,11 +38,28 @@ public class ProductoController {
     @Model
     public Producto nuevoProducto() {
         producto = new Producto();
+        if (id != null && id > 0) {
+            productoService.porId(id)
+                    .ifPresent(p -> this.producto = p);
+        }
         return producto;
     }
 
     public String guardar() {
         productoService.guardar(producto);
         return "index?faces-redirect=true";
+    }
+
+    public String editar(Long id) {
+        this.id = id;
+        return "form.xhtml";
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

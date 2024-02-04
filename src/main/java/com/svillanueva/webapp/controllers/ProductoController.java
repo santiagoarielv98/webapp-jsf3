@@ -39,8 +39,7 @@ public class ProductoController {
     }
 
     public String guardar() {
-        System.out.println(producto);
-//        productoService.guardar(producto);
+        productoService.guardar(producto);
         return "index?faces-redirect=true";
     }
 }

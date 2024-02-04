@@ -23,4 +23,19 @@ public class ProductoRepository implements CrudRepository<Producto> {
     public Producto porId(Long id) {
         return em.find(Producto.class, id);
     }
+
+    @Override
+    public void guardar(Producto producto) {
+        if (producto.getId() != null && producto.getId() > 0) {
+            em.merge(producto);
+        } else {
+            em.persist(producto);
+        }
+    }
+
+    @Override
+    public void eliminar(Long id) {
+        Producto producto = porId(id);
+        em.remove(producto);
+    }
 }

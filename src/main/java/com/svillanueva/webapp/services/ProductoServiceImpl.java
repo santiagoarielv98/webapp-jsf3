@@ -23,4 +23,14 @@ public class ProductoServiceImpl implements ProductoService {
     public Optional<Producto> porId(Long id) {
         return Optional.ofNullable(productoRepository.porId(id));
     }
+
+    @Override
+    public void guardar(Producto producto) {
+        productoRepository.guardar(producto);
+    }
+
+    @Override
+    public void eliminar(Long id) {
+        productoRepository.eliminar(id);
+    }
 }

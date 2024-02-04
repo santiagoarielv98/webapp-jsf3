@@ -10,31 +10,39 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+>
 
 <h:head>
     <title>Formulario Producto</title>
 </h:head>
 
 <h:body>
-    <h1>
-        <h:outputText value="Formulario Producto"/>
-    </h1>
-    <h:form>
-        <h:panelGrid columns="2">
-            <h:outputLabel value="Nombre" for="nombre"/>
-            <h:inputText id="nombre" value="#{nuevoProducto.nombre}"/>
+    <h:panelGrid border="1">
+        <f:facet name="header">
+            <h:outputText value="Formulario Producto"/>
+        </f:facet>
 
-            <h:outputLabel value="Precio" for="precio"/>
-            <h:inputText id="precio" value="#{nuevoProducto.precio}"/>
+        <h:link outcome="index" value="Volver"/>
 
-            <h:outputLabel value="Sku" for="sku"/>
-            <h:inputText id="sku" value="#{nuevoProducto.sku}"/>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Nombre" for="nombre"/>
+                <h:inputText id="nombre" value="#{nuevoProducto.nombre}"/>
 
-            <h:commandButton value="Crear" action="#{productoController.guardar}"/>
-            <h:inputHidden value="#{nuevoProducto.id}"/>
-        </h:panelGrid>
-    </h:form>
+                <h:outputLabel value="Precio" for="precio"/>
+                <h:inputText id="precio" value="#{nuevoProducto.precio}"/>
+
+                <h:outputLabel value="Sku" for="sku"/>
+                <h:inputText id="sku" value="#{nuevoProducto.sku}"/>
+
+                <h:commandButton value="Crear" action="#{productoController.guardar}"/>
+                <h:inputHidden value="#{nuevoProducto.id}"/>
+            </h:panelGrid>
+        </h:form>
+    </h:panelGrid>
+
 </h:body>
 
 </html>

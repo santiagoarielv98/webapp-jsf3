@@ -21,16 +21,14 @@ public class ProductoController implements Serializable {
 
     @PostConstruct
     public void init() {
-        productos = productoService.listar();
         producto = new Producto();
+        productos = productoService.listar();
     }
 
     public String guardar() {
-        System.out.println("Guardando producto: " + producto);
         productoService.guardar(producto);
         producto = new Producto(); // Limpiar el formulario
         productos = productoService.listar(); // Actualizar la lista después de guardar
-        System.out.println("Productos: " + productos);
         return "index?faces-redirect=true";
     }
 

@@ -2,6 +2,7 @@ package com.svillanueva.webapp.entities;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
 
@@ -12,15 +13,23 @@ public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty
     private String nombre;
 
+    @NotNull
+    @Min(5)
+    @Max(100000)
     private Integer precio;
+
+    @NotEmpty
+    @Size(min = 4, max = 10)
     private String sku;
 
     @Column(name = "fecha_registro")
     //    @CreationTimestamp
     private LocalDate fechaRegistro;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     private Categoria categoria;
 

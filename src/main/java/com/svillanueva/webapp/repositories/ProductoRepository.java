@@ -15,13 +15,13 @@ public class ProductoRepository implements CrudRepository<Producto> {
 
     @Override
     public List<Producto> listar() {
-        return em.createQuery("SELECT p FROM Producto p JOIN FETCH p.categoria", Producto.class)
+        return em.createQuery("SELECT p FROM Producto p LEFT JOIN FETCH p.categoria", Producto.class)
                 .getResultList();
     }
 
     @Override
     public Producto porId(Long id) {
-        return em.createQuery("SELECT p FROM Producto p JOIN FETCH p.categoria WHERE p.id = :id", Producto.class)
+        return em.createQuery("SELECT p FROM Producto p LEFT JOIN FETCH p.categoria WHERE p.id = :id", Producto.class)
                 .setParameter("id", id)
                 .getSingleResult();
     }

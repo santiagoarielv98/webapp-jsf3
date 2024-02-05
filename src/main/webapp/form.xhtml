@@ -22,6 +22,7 @@
     <h2><h:outputText value="#{productoController.producto.id != null ? 'Editar' : 'Crear'}"/> Producto</h2>
 
     <h:form>
+        <h:messages style="color: red;"/>
         <h:panelGrid columns="2">
             <h:outputLabel for="nombre" value="Nombre:"/>
             <h:inputText id="nombre" value="#{productoController.producto.nombre}" required="true"
@@ -39,12 +40,16 @@
                            rendered="#{productoController.producto.id != null}"/>
             <h:inputText id="fechaRegistro" value="#{productoController.producto.fechaRegistro}"
                          rendered="#{productoController.producto.id != null}">
+                <f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
                 <f:passThroughAttribute name="readonly" value="true"/>
                 <f:passThroughAttribute name="type" value="date"/>
             </h:inputText>
         </h:panelGrid>
 
         <h:inputHidden value="#{productoController.producto.id}"/>
+        <h:inputHidden value="#{productoController.producto.fechaRegistro}">
+            <f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
+        </h:inputHidden>
 
         <h:commandButton value="#{productoController.producto.id != null ? 'Editar' : 'Crear'}"
                          action="#{productoController.guardar}"/>

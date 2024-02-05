@@ -2,16 +2,13 @@ package com.svillanueva.webapp.controllers;
 
 import com.svillanueva.webapp.entities.Producto;
 import com.svillanueva.webapp.services.ProductoService;
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Model;
 import jakarta.inject.Inject;
-import jakarta.inject.Named;
 
-import java.io.Serializable;
 import java.util.List;
 
-@Named
-@RequestScoped
-public class ProductoController implements Serializable {
+@Model
+public class ProductoController {
     @Inject
     private ProductoService productoService;
 
@@ -19,15 +16,15 @@ public class ProductoController implements Serializable {
     private List<Producto> productos;
 
     public String guardar() {
+        System.out.println("Guardando producto: " + producto);
         productoService.guardar(producto);
-        producto = new Producto();
         return "index?faces-redirect=true";
     }
 
     public String editar(Long id) {
         producto = productoService.porId(id)
                 .orElse(new Producto());
-        return "form?faces-redirect=true";
+        return "form";
     }
 
     public void eliminar(Long id) {

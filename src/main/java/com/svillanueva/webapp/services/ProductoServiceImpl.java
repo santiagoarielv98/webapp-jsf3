@@ -1,5 +1,6 @@
 package com.svillanueva.webapp.services;
 
+import com.svillanueva.webapp.entities.Categoria;
 import com.svillanueva.webapp.entities.Producto;
 import com.svillanueva.webapp.repositories.CrudRepository;
 import jakarta.ejb.Stateless;
@@ -13,6 +14,9 @@ import java.util.Optional;
 public class ProductoServiceImpl implements ProductoService {
     @Inject
     private CrudRepository<Producto> productoRepository;
+
+    @Inject
+    private CrudRepository<Categoria> categoriaRepository;
 
     @Override
     public List<Producto> listar() {
@@ -32,5 +36,15 @@ public class ProductoServiceImpl implements ProductoService {
     @Override
     public void eliminar(Long id) {
         productoRepository.eliminar(id);
+    }
+
+    @Override
+    public List<Categoria> listarCategorias() {
+        return categoriaRepository.listar();
+    }
+
+    @Override
+    public Optional<Categoria> categoriaPorId(Long id) {
+        return Optional.ofNullable(categoriaRepository.porId(id));
     }
 }

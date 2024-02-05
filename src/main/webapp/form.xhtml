@@ -32,6 +32,15 @@
             <h:inputText id="sku" value="#{productoController.producto.sku}" required="true"
                          requiredMessage="El SKU es obligatorio."/>
 
+            <h:outputLabel for="categoria" value="Categoria:"/>
+            <h:selectOneMenu id="categoria" value="#{productoController.producto.categoria}"
+                             converter="#{categoriaConverter}">
+                <f:selectItem itemLabel="--- Seleccionar una categoria" itemValue="${null}"/>
+                <f:selectItems value="#{productoController.categorias}" var="categoria"
+                               itemValue="#{categoria}"
+                               itemLabel="#{categoria.nombre}"/>
+            </h:selectOneMenu>
+
             <h:outputLabel for="precio" value="Precio:"/>
             <h:inputText id="precio" value="#{productoController.producto.precio}" required="true"
                          requiredMessage="El precio es obligatorio."/>

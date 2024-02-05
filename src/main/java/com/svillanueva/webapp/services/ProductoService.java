@@ -1,5 +1,6 @@
 package com.svillanueva.webapp.services;
 
+import com.svillanueva.webapp.entities.Categoria;
 import com.svillanueva.webapp.entities.Producto;
 import jakarta.ejb.Local;
 
@@ -15,4 +16,9 @@ public interface ProductoService {
     void guardar(Producto producto);
 
     void eliminar(Long id);
+
+    List<Categoria> listarCategorias();
+
+    Optional<Categoria> categoriaPorId(Long id);
 }
+

@@ -1,5 +1,6 @@
 package com.svillanueva.webapp.controllers;
 
+import com.svillanueva.webapp.entities.Categoria;
 import com.svillanueva.webapp.entities.Producto;
 import com.svillanueva.webapp.services.ProductoService;
 import jakarta.enterprise.inject.Model;
@@ -14,6 +15,7 @@ public class ProductoController {
 
     private Producto producto = new Producto();
     private List<Producto> productos;
+    private List<Categoria> categorias;
 
     public String guardar() {
         System.out.println("Guardando producto: " + producto);
@@ -47,6 +49,15 @@ public class ProductoController {
         }
         return productos;
     }
+
+    public List<Categoria> getCategorias() {
+        if (categorias == null) {
+            categorias = productoService.listarCategorias();
+        }
+        return categorias;
+    }
+
+
 
     public void setProductos(List<Producto> productos) {
         this.productos = productos;

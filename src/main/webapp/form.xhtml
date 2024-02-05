@@ -37,7 +37,6 @@
                              converter="#{categoriaConverter}">
                 <f:selectItem itemLabel="--- Seleccionar una categoria" itemValue="${null}"/>
                 <f:selectItems value="#{productoController.categorias}" var="categoria"
-                               itemValue="#{categoria}"
                                itemLabel="#{categoria.nombre}"/>
             </h:selectOneMenu>
 

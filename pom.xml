@@ -27,6 +27,7 @@
             <version>6.3.0.CR1</version>
             <scope>provided</scope>
         </dependency>
+
     </dependencies>
     <build>
         <finalName>${project.artifactId}</finalName>

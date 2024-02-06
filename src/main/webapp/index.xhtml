@@ -1,55 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      data-bs-theme="dark"
 >
 <h:head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
     <title>Listado de productos</title>
 </h:head>
 <h:body>
-    <h2>Listado de Productos</h2>
-
-    <h:form>
-        <h:commandButton value="Crear Nuevo Producto" action="form?faces-redirect=true"/>
-    </h:form>
-
-    <h:form>
-        <h:dataTable value="#{productoController.productos}" var="producto" styleClass="productos-table">
-            <h:column>
-                <f:facet name="header">ID</f:facet>
-                <h:outputText value="#{producto.id}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Nombre</f:facet>
-                <h:outputText value="#{producto.nombre}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Sku</f:facet>
-                <h:outputText value="#{producto.sku}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Categoria</f:facet>
-                <h:outputText value="#{producto.categoria.nombre}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Precio</f:facet>
-                <h:outputText value="#{producto.precio}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Fecha Registro</f:facet>
-                <h:outputText value="#{producto.fechaRegistro}"/>
-            </h:column>
-            <h:column>
-                <h:commandButton value="Editar" action="${productoController.editar(producto.id)}"/>
-            </h:column>
-            <h:column>
-                <h:commandButton value="Eliminar" action="#{productoController.eliminar(producto.id)}"
-                                 onclick="return confirm(`¿Está seguro que desea eliminar '#{producto.nombre}'?`)"/>
-            </h:column>
-        </h:dataTable>
-    </h:form>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">SV</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"/>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <h:link value="Home" outcome="index" styleClass="nav-link active"/>
+                    </li>
+                </ul>
+                <h:form styleClass="d-flex">
+                    <h:commandButton value="Crear Nuevo Producto" action="form?faces-redirect=true"
+                                     styleClass="btn btn-success"/>
+                </h:form>
+            </div>
+        </div>
+    </nav>
+    <main class="container mt-4">
+        <h2>Listado de Productos</h2>
+        <h:form>
+            <h:dataTable value="#{productoController.productos}" var="producto" styleClass="table table-hover">
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                    <h:outputText value="#{producto.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Nombre</f:facet>
+                    <h:outputText value="#{producto.nombre}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Sku</f:facet>
+                    <h:outputText value="#{producto.sku}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Categoria</f:facet>
+                    <h:outputText value="#{producto.categoria.nombre}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Precio</f:facet>
+                    <h:outputText value="#{producto.precio}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Fecha Registro</f:facet>
+                    <h:outputText value="#{producto.fechaRegistro}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Acciones</f:facet>
+                    <h:commandButton styleClass="btn btn-outline-primary me-2"
+                                     value="Editar" action="${productoController.editar(producto.id)}"/>
+                    <h:commandButton styleClass="btn btn-outline-danger" value="Eliminar"
+                                     action="#{productoController.eliminar(producto.id)}"
+                                     onclick="return confirm(`¿Está seguro que desea eliminar '#{producto.nombre}'?`)"/>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </main>
 </h:body>
-
 </html>

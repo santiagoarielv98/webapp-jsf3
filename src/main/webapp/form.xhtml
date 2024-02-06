@@ -6,23 +6,27 @@
                 template="/layout/main.xhtml"
 >
     <ui:define name="content">
-        <h2><h:outputText value="#{productoController.producto.id != null ? 'Editar' : 'Crear'}"/> Producto</h2>
+        <h2><h:outputText
+                value="#{productoController.producto.id != null ? messages['producto.boton.editar'] : messages['producto.boton.crear']}"/> Producto
+        </h2>
+        <h:commandLink styleClass="btn btn-outline-secondary" outcome="index?faces-redirect=true"
+                       value="#{messages['producto.boton.volver']}" immediate="true"/>
         <h:form style="max-width: 500px;">
             <h:inputHidden value="#{productoController.producto.id}"/>
             <h:inputHidden value="#{productoController.producto.fechaRegistro}">
                 <f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
             </h:inputHidden>
             <div class="mb-3">
-                <h:outputLabel styleClass="form-label" for="nombre" value="Nombre:"/>
+                <h:outputLabel styleClass="form-label" for="nombre" value="#{messages['producto.nombre']}:"/>
                 <h:inputText styleClass="form-control#{!component.attributes.valid ? ' is-invalid' :''}"
                              id="nombre"
                              value="#{productoController.producto.nombre}"
                              requiredMessage="El nombre es obligatorio."/>
-                <h:message styleClass="invalid-feedback d-block" for="nombre" />
+                <h:message styleClass="invalid-feedback d-block" for="nombre"/>
             </div>
 
             <div class="mb-3">
-                <h:outputLabel styleClass="form-label" for="sku" value="SKU:"/>
+                <h:outputLabel styleClass="form-label" for="sku" value="#{messages['producto.sku']}:"/>
                 <h:inputText
                         styleClass="form-control#{!component.attributes.valid ? ' is-invalid' :''}"
                         id="sku" value="#{productoController.producto.sku}"
@@ -30,7 +34,7 @@
                 <h:message styleClass="invalid-feedback d-block" for="sku"/>
             </div>
             <div class="mb-3">
-                <h:outputLabel styleClass="form-label" for="categoria" value="Categoria:"/>
+                <h:outputLabel styleClass="form-label" for="categoria" value="#{messages['producto.categoria']}:"/>
                 <h:selectOneMenu
                         styleClass="form-control#{!component.attributes.valid ? ' is-invalid' :''}"
                         id="categoria"
@@ -43,7 +47,7 @@
                 <h:message styleClass="invalid-feedback d-block" for="categoria"/>
             </div>
             <div class="mb-3">
-                <h:outputLabel styleClass="form-label" for="precio" value="Precio:"/>
+                <h:outputLabel styleClass="form-label" for="precio" value="#{messages['producto.precio']}:"/>
                 <h:inputText
                         styleClass="form-control#{!component.attributes.valid ? ' is-invalid' :''}"
                         id="precio"
@@ -52,7 +56,8 @@
                 <h:message styleClass="invalid-feedback d-block" for="precio"/>
             </div>
             <div class="mb-3">
-                <h:outputLabel styleClass="form-label" for="fechaRegistro" value="Fecha de Registro:"
+                <h:outputLabel styleClass="form-label" for="fechaRegistro"
+                               value="#{messages['producto.fechaRegistro']}:"
                                rendered="#{productoController.producto.id != null}"/>
                 <h:inputText
                         styleClass="form-control#{!component.attributes.valid ? ' is-invalid' :''}"
@@ -67,11 +72,11 @@
             </div>
             <h:commandButton
                     styleClass="btn btn-primary me-2"
-                    value="#{productoController.producto.id != null ? 'Editar' : 'Crear'}"
+                    value="#{productoController.producto.id != null ? messages['producto.boton.editar'] : messages['producto.boton.crear']}"
                     action="#{productoController.guardar}"/>
             <h:commandButton
                     styleClass="btn btn-secondary"
-                    value="Cancelar" action="index?faces-redirect=true" immediate="true"/>
+                    value="#{messages['producto.boton.cancelar']}" action="index?faces-redirect=true" immediate="true"/>
         </h:form>
     </ui:define>
 </ui:composition>

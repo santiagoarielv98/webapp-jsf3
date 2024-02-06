@@ -5,39 +5,41 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="/layout/main.xhtml"
 >
+    <f:loadBundle var="messages" basename="com.svillanueva.webapp.configs.ProducerResources"/>
     <ui:define name="content">
-        <h2>Listado de Productos</h2>
+        <h2>#{messages['home.texto.listado']}</h2>
         <h:form>
             <h:dataTable value="#{productoController.productos}" var="producto" styleClass="table table-hover">
                 <h:column>
-                    <f:facet name="header">ID</f:facet>
+                    <f:facet name="header">#{messages['producto.id']}</f:facet>
                     <h:outputText value="#{producto.id}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Nombre</f:facet>
+                    <f:facet name="header">#{messages['producto.nombre']}</f:facet>
                     <h:outputText value="#{producto.nombre}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Sku</f:facet>
+                    <f:facet name="header">#{messages['producto.sku']}</f:facet>
                     <h:outputText value="#{producto.sku}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Categoria</f:facet>
+                    <f:facet name="header">#{messages['producto.categoria']}</f:facet>
                     <h:outputText value="#{producto.categoria.nombre}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Precio</f:facet>
+                    <f:facet name="header">#{messages['producto.precio']}</f:facet>
                     <h:outputText value="#{producto.precio}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Fecha Registro</f:facet>
+                    <f:facet name="header">#{messages['producto.fechaRegistro']}</f:facet>
                     <h:outputText value="#{producto.fechaRegistro}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Acciones</f:facet>
+                    <f:facet name="header">#{messages['producto.acciones']}</f:facet>
                     <h:commandButton styleClass="btn btn-outline-primary me-2"
-                                     value="Editar" action="${productoController.editar(producto.id)}"/>
-                    <h:commandButton styleClass="btn btn-outline-danger" value="Eliminar"
+                                     value="#{messages['producto.boton.editar']}"
+                                     action="${productoController.editar(producto.id)}"/>
+                    <h:commandButton styleClass="btn btn-outline-danger" value="#{messages['producto.boton.eliminar']}"
                                      action="#{productoController.eliminar(producto.id)}"
                                      onclick="return confirm(`¿Está seguro que desea eliminar '#{producto.nombre}'?`)"/>
                 </h:column>

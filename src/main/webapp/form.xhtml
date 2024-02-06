@@ -1,39 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html>
-
-<!--suppress ELValidationInspection -->
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      data-bs-theme="dark"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/layout/main.xhtml"
 >
-<h:head>
-    <title>Formulario Producto</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
-</h:head>
-<h:body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">SV</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"/>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <h:link value="Home" outcome="index" styleClass="nav-link"/>
-                    </li>
-                </ul>
-                <h:form styleClass="d-flex">
-                    <h:commandButton value="Crear Nuevo Producto" action="form?faces-redirect=true"
-                                     styleClass="btn btn-success"/>
-                </h:form>
-            </div>
-        </div>
-    </nav>
-    <main class="container mt-4">
+    <ui:define name="content">
         <h2><h:outputText value="#{productoController.producto.id != null ? 'Editar' : 'Crear'}"/> Producto</h2>
         <h:form style="max-width: 500px;">
             <h:inputHidden value="#{productoController.producto.id}"/>
@@ -42,18 +14,17 @@
             </h:inputHidden>
             <div class="mb-3">
                 <h:outputLabel styleClass="form-label" for="nombre" value="Nombre:"/>
-                <h:inputText
-                        styleClass="form-control#{!component.valid ? ' is-invalid' :''}"
-                        id="nombre"
-                        value="#{productoController.producto.nombre}"
-                        requiredMessage="El nombre es obligatorio."/>
+                <h:inputText styleClass="form-control#{!component.attributes.valid ? ' is-invalid' :''}"
+                             id="nombre"
+                             value="#{productoController.producto.nombre}"
+                             requiredMessage="El nombre es obligatorio."/>
                 <h:message styleClass="invalid-feedback d-block" for="nombre"/>
             </div>
 
             <div class="mb-3">
                 <h:outputLabel styleClass="form-label" for="sku" value="SKU:"/>
                 <h:inputText
-                        styleClass="form-control#{!component.valid ? ' is-invalid' :''}"
+                        styleClass="form-control#{!component.attributes.valid ? ' is-invalid' :''}"
                         id="sku" value="#{productoController.producto.sku}"
                         requiredMessage="El SKU es ob ligatorio."/>
                 <h:message styleClass="invalid-feedback d-block" for="sku"/>
@@ -61,7 +32,7 @@
             <div class="mb-3">
                 <h:outputLabel styleClass="form-label" for="categoria" value="Categoria:"/>
                 <h:selectOneMenu
-                        styleClass="form-control#{!component.valid ? ' is-invalid' :''}"
+                        styleClass="form-control#{!component.attributes.valid ? ' is-invalid' :''}"
                         id="categoria"
                         value="#{productoController.producto.categoria}"
                         converter="#{categoriaConverter}">
@@ -74,7 +45,7 @@
             <div class="mb-3">
                 <h:outputLabel styleClass="form-label" for="precio" value="Precio:"/>
                 <h:inputText
-                        styleClass="form-control#{!component.valid ? ' is-invalid' :''}"
+                        styleClass="form-control#{!component.attributes.valid ? ' is-invalid' :''}"
                         id="precio"
                         value="#{productoController.producto.precio}"
                         requiredMessage="El precio es obligatorio."/>
@@ -84,7 +55,7 @@
                 <h:outputLabel styleClass="form-label" for="fechaRegistro" value="Fecha de Registro:"
                                rendered="#{productoController.producto.id != null}"/>
                 <h:inputText
-                        styleClass="form-control#{!component.valid ? ' is-invalid' :''}"
+                        styleClass="form-control#{!component.attributes.valid ? ' is-invalid' :''}"
                         id="fechaRegistro"
                         value="#{productoController.producto.fechaRegistro}"
                         rendered="#{productoController.producto.id != null}">
@@ -102,6 +73,5 @@
                     styleClass="btn btn-secondary"
                     value="Cancelar" action="index?faces-redirect=true" immediate="true"/>
         </h:form>
-    </main>
-</h:body>
-</html>
+    </ui:define>
+</ui:composition>

@@ -4,6 +4,8 @@ import com.svillanueva.webapp.entities.Categoria;
 import com.svillanueva.webapp.entities.Producto;
 import com.svillanueva.webapp.services.ProductoService;
 import jakarta.enterprise.inject.Model;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 
 import java.util.List;
@@ -13,14 +15,23 @@ public class ProductoController {
     @Inject
     private ProductoService productoService;
 
+    @Inject
+    private FacesContext facesContext;
+
     private Producto producto = new Producto();
     private List<Producto> productos;
     private List<Categoria> categorias;
 
     public String guardar() {
-        System.out.println("Guardando producto: " + producto);
         productoService.guardar(producto);
-        return "index?faces-redirect=true";
+
+        if (producto.getId() == null) {
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Producto:", "Producto guardado con éxito."));
+        } else {
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Producto:", "Producto actualizado con éxito."));
+        }
+        productos = null;
+        return "index";
     }
 
     public String editar(Long id) {
@@ -31,6 +42,7 @@ public class ProductoController {
 
     public void eliminar(Long id) {
         productoService.eliminar(id);
+        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Producto:", "Producto eliminado con éxito."));
         productos = null;
     }
 
@@ -56,7 +68,6 @@ public class ProductoController {
         }
         return categorias;
     }
-
 
 
     public void setProductos(List<Producto> productos) {

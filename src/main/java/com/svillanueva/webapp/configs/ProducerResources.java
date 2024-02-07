@@ -1,19 +1,23 @@
 package com.svillanueva.webapp.configs;
 
+
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Produces;
 import jakarta.faces.context.FacesContext;
-import jakarta.ws.rs.Produces;
+import jakarta.inject.Named;
+
+import java.util.ResourceBundle;
 
 @ApplicationScoped
 public class ProducerResources {
+
     @Produces
-    @RequestScoped
-    public FacesContext getFacesContext() {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        facesContext.getExternalContext()
-                .getFlash()
-                .setKeepMessages(true);
-        return facesContext;
+    @Named("messages")
+    public ResourceBundle produceResourceBundle() {
+        return ResourceBundle.getBundle("messages", FacesContext.getCurrentInstance()
+                .getViewRoot()
+                .getLocale());
     }
 }
+
+

@@ -11,27 +11,27 @@
             <h:dataTable value="#{productoController.productos}" var="producto" styleClass="table table-hover">
                 <h:column>
                     <f:facet name="header">#{messages['producto.id']}</f:facet>
-                    <h:outputText value="#{producto.id}"/>
+                    #{producto.id}
                 </h:column>
                 <h:column>
                     <f:facet name="header">#{messages['producto.nombre']}</f:facet>
-                    <h:outputText value="#{producto.nombre}"/>
+                    #{producto.nombre}
                 </h:column>
                 <h:column>
                     <f:facet name="header">#{messages['producto.sku']}</f:facet>
-                    <h:outputText value="#{producto.sku}"/>
+                    #{producto.sku}
                 </h:column>
                 <h:column>
                     <f:facet name="header">#{messages['producto.categoria']}</f:facet>
-                    <h:outputText value="#{producto.categoria.nombre}"/>
+                    #{producto.categoria.nombre}
                 </h:column>
                 <h:column>
                     <f:facet name="header">#{messages['producto.precio']}</f:facet>
-                    <h:outputText value="#{producto.precio}"/>
+                    #{producto.precio}
                 </h:column>
                 <h:column>
                     <f:facet name="header">#{messages['producto.fechaRegistro']}</f:facet>
-                    <h:outputText value="#{producto.fechaRegistro}"/>
+                    #{producto.fechaRegistro}
                 </h:column>
                 <h:column>
                     <f:facet name="header">#{messages['producto.acciones']}</f:facet>

@@ -6,11 +6,11 @@
                 template="/layout/main.xhtml"
 >
     <ui:define name="content">
-        <h2><h:outputText
-                value="#{productoController.producto.id != null ? messages['producto.boton.editar'] : messages['producto.boton.crear']}"/> Producto
+        <h:link styleClass="btn btn-outline-secondary" outcome="index?faces-redirect=true"
+                value="#{messages['producto.boton.volver']}" immediate="true"/>
+        <h2>
+            #{productoController.producto.id != null ? messages['producto.boton.editar'] : messages['producto.boton.crear']} Producto
         </h2>
-        <h:commandLink styleClass="btn btn-outline-secondary" outcome="index?faces-redirect=true"
-                       value="#{messages['producto.boton.volver']}" immediate="true"/>
         <h:form style="max-width: 500px;">
             <h:inputHidden value="#{productoController.producto.id}"/>
             <h:inputHidden value="#{productoController.producto.fechaRegistro}">
